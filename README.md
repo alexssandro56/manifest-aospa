@@ -88,9 +88,9 @@ cd WORKSPACE
 ./rom-build.sh DEVICE
 ```
 
-For the POCO F7 (`onyx`), an `eng` build makes boot logs easier to collect:
+For the POCO F7 (`onyx`), build a `userdebug` image:
 ```bash
-./rom-build.sh onyx -t eng -j$(nproc --all)
+./rom-build.sh onyx -t userdebug
 ```
 The first build syncs the `onyx` dependencies listed in `vendor/aospa/products/onyx/beans.xml`.
 
