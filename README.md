@@ -38,13 +38,14 @@ mkdir WORKSPACE
 cd WORKSPACE
 ```
 
-Initialize the manifest repository:
+Initialize the manifest repository.
+This fork pulls `vendor/aospa` from [alexssandro56/android_vendor_aospa](https://github.com/alexssandro56/android_vendor_aospa) (branch `ccr-oss-kernel`), which carries the POCO F7 (`onyx`) device, vendor and kernel repositories:
 
 > [!IMPORTANT]
 > Configure your real name and email address in Git before you initialize Repo if you plan to submit patches.
 
 ```bash
-repo init -u https://github.com/AOSPA/manifest -b calcite
+repo init -u https://github.com/alexssandro56/manifest-aospa -b calcite
 ```
 
 ### Download the source tree
@@ -79,13 +80,19 @@ repo sync PROJECT
 ## Build
 
 The bundled builder script `./rom-build.sh` automates all build steps for a target device.
-Provide the target device codename as the argument (for example, `phone2` for Nothing Phone (2)).
+Provide the target device codename as the argument (for example, `onyx` for POCO F7).
 
 Navigate to your workspace root and execute the build script:
 ```bash
 cd WORKSPACE
 ./rom-build.sh DEVICE
 ```
+
+For the POCO F7 (`onyx`), an `eng` build makes boot logs easier to collect:
+```bash
+./rom-build.sh onyx -t eng -j$(nproc --all)
+```
+The first build syncs the `onyx` dependencies listed in `vendor/aospa/products/onyx/beans.xml`.
 
 ## Submit patches
 
